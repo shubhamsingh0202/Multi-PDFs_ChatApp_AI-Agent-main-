@@ -1,4 +1,15 @@
+---
+title: Multi-PDF Chat AI Agent
+emoji: 📚
+colorFrom: indigo
+colorTo: purple
+sdk: streamlit
+app_file: chatapp.py
+pinned: false
+---
+
 # Multi-PDFs 📚 ChatApp AI Agent 🤖 (Groq Edition)
+
 
 Meet the Multi-PDF Chat AI App! 🚀 Chat seamlessly with multiple PDF documents using LangChain, Groq API (Llama-3.3-70b), and BM25 Retriever, deployed as a sleek Streamlit web application. Get instant, accurate responses powered by ultra-fast Groq inference. 📚💬 Transform your document analysis experience! 🔥✨
 
