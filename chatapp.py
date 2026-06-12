@@ -240,19 +240,23 @@ for key, default in [
 # Sidebar
 # ─────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("## 🔑 API Configuration")
+    # First check if key is set in environment/dotenv
     env_key = os.getenv("GROQ_API_KEY", "")
     if env_key == "your_groq_api_key_here":
         env_key = ""
     
-    groq_api_key = st.text_input(
-        "Groq API Key",
-        value=env_key,
-        type="password",
-        placeholder="gsk_...",
-        help="Get your API key from the Groq Console (https://console.groq.com/)"
-    )
-    st.markdown("---")
+    # If not provided in environment, show input field in the sidebar
+    if not env_key:
+        st.markdown("## 🔑 API Configuration")
+        groq_api_key = st.text_input(
+            "Groq API Key",
+            type="password",
+            placeholder="gsk_...",
+            help="Get your API key from the Groq Console (https://console.groq.com/)"
+        )
+        st.markdown("---")
+    else:
+        groq_api_key = env_key
     
     st.markdown("## 📚 Upload Documents")
     st.markdown("---")
@@ -353,8 +357,8 @@ with st.form(key="chat_form", clear_on_submit=True):
         submit = st.form_submit_button("Send 🚀", use_container_width=True)
 
 if submit and user_question:
-    if not groq_api_key.strip():
-        st.error("🔑 Please enter a valid Groq API Key in the sidebar.")
+    if not groq_api_key or not groq_api_key.strip():
+        st.error("🔑 Groq API Key is missing. Please set the GROQ_API_KEY environment variable, add it to your .env file, or enter it in the sidebar.")
     elif not st.session_state.processed:
         st.warning("⚠️ Please upload and process your PDF documents first.")
     else:
